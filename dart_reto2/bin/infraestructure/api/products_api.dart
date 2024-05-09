@@ -3,14 +3,13 @@ import 'package:dartz/dartz.dart';
 
 import '../../model/product_model.dart';
 
-typedef ResponseGetAllProducts = Option<Either<String, List<ProductModel>>>;
-typedef ResponseGetProduct = Option<Either<String, ProductModel>>;
+typedef ResponseGetAllProducts = Either<String, List<ProductModel>>;
+typedef ResponseGetProduct = Either<String, ProductModel>;
 
 abstract class ProductsApi {
 
-  Future<void> getAllProducts(Function (ResponseGetAllProducts) callback);
-
-  Future<void> getSingleProduct(int id,Function (ResponseGetProduct) callback);
+  Future<ResponseGetAllProducts> getAllProducts();
+  Future<ResponseGetProduct> getSingleProduct(int id);
   
-
+  
 }

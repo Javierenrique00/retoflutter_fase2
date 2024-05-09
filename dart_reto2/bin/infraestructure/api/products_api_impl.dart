@@ -11,45 +11,40 @@ class ProductsApiImpl implements ProductsApi{
   static const String urlProducts = '/products';
 
   @override
-  Future<void> getAllProducts(Function (ResponseGetAllProducts) callback) async {
-    ResponseGetAllProducts responseGetAllProducts = none();
-    callback(responseGetAllProducts);
-    var url = Uri.https(urlEndpoint, urlProducts, {'q': '{https}'});
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      var jsonResponseList = convert.jsonDecode(response.body) as List<dynamic>;
-      final List<ProductModel> resultList = [];
-      for(final element in jsonResponseList){
-          final conv = ProductModel.fromJson(element);
-          resultList.add(conv);
+  Future<ResponseGetAllProducts> getAllProducts() async {
+    try{
+      var url = Uri.https(urlEndpoint, urlProducts, {'q': '{https}'});
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        var jsonResponseList = convert.jsonDecode(response.body) as List<dynamic>;
+        final List<ProductModel> resultList = [];
+        for(final element in jsonResponseList){
+            final conv = ProductModel.fromJson(element);
+            resultList.add(conv);
+        }
+        return right(resultList);
+      } else {
+        return left(response.statusCode.toString());
       }
-      responseGetAllProducts = some(right(resultList));
-      callback(responseGetAllProducts);
-    } else {
-      responseGetAllProducts = some(left(response.statusCode.toString()));
-      callback(responseGetAllProducts);
+    }catch(error){
+      return left(error.toString());
     }
   }
   
   @override
-  Future<void> getSingleProduct(int id, Function (ResponseGetProduct) callback) async {
-    ResponseGetProduct responseGetProduct = none();
-    callback(responseGetProduct);
+  Future<ResponseGetProduct> getSingleProduct(int id) async {
     try{
       var url = Uri.https(urlEndpoint, '$urlProducts/$id', {'q': '{https}'});
       var response = await http.get(url);
       if (response.statusCode == 200) {
         var jsonResponseList = convert.jsonDecode(response.body) as dynamic;
         final conv = ProductModel.fromJson(jsonResponseList);
-        responseGetProduct = some(right(conv));
-        callback(responseGetProduct);
+        return right(conv);
       } else {
-        responseGetProduct = some(left(response.statusCode.toString()));
-        callback(responseGetProduct);
+        return left(response.statusCode.toString());
       }
     }catch(error){
-        responseGetProduct = some(left(error.toString()));
-        callback(responseGetProduct);
+        return left(error.toString());
     }
   }
 

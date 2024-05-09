@@ -9,26 +9,17 @@ Future<bool> espera5Seconds() async {
 main() async {
   print("--------------------------");
 
-  ProductsApiImpl().getAllProducts((productsEither) {
-    productsEither.fold(
-      () => print('Loading all products (waitting)...'),
-      (dataE) => dataE.fold(
-        (l) => print('error code $l'),
-        (r) => print('loaded all products: ${r.length}'),
-      ),
-    );
-  });
+  final allProductsEither = await ProductsApiImpl().getAllProducts();
+  allProductsEither.fold(
+    (l) => print('error code $l'),
+    (r) => print('loaded all products: ${r.length}'),
+  );
 
-  ProductsApiImpl().getSingleProduct(5, (singleProductEither) {
-    singleProductEither.fold(
-      () => print('Loading single products (waitting)...'),
-      (dataE) => dataE.fold(
-        (l) => print('error code $l'),
-        (r) => print('loaded product 5: $r'),
-      ),
-    );
-  });
-
+  final singleProductEither = await ProductsApiImpl().getSingleProduct(5);
+  singleProductEither.fold(
+    (l) => print('error code $l'),
+    (r) => print('loaded product 5: $r'),
+  );
 
   var finaly = await espera5Seconds();
   print('Program End $finaly.----------------');
