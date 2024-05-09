@@ -1,31 +1,35 @@
-import 'dart:convert' as convert;
-import 'package:http/http.dart' as http;
+import 'infraestructure/api/products_api_impl.dart';
 
-import 'model/product.dart';
+Future<bool> espera5Seconds() async {
+  await Future.delayed(const Duration(seconds: 5));
+  print('5 seconds');
+  return true;
+}
 
-Future<void> main() async {
+main() async {
   print("--------------------------");
 
-  var url = Uri.https('fakestoreapi.com', '/products', {'q': '{https}'});
-  var response = await http.get(url);
-  if (response.statusCode == 200) {
-    var jsonResponseList = convert.jsonDecode(response.body) as List<dynamic>;
+  ProductsApiImpl().getAllProducts((productsEither) {
+    productsEither.fold(
+      () => print('Loading all products (waitting)...'),
+      (dataE) => dataE.fold(
+        (l) => print('error code $l'),
+        (r) => print('loaded all products: ${r.length}'),
+      ),
+    );
+  });
 
-    jsonResponseList.forEach((element) {
-      print("Element:${element}");
-      print("--------------------------------------");
-      final conv = Product.fromJson(element);
-      print("Conv.id:${conv.id}");
-      print("Conv.title:${conv.title}");
-      print("Conv.price:${conv.price}");
-      print("Conv.description:${conv.description}");
-      print("Conv.category:${conv.category}");
-      print("Conv.image:${conv.image}");
-    });
+  ProductsApiImpl().getSingleProduct(5, (singleProductEither) {
+    singleProductEither.fold(
+      () => print('Loading single products (waitting)...'),
+      (dataE) => dataE.fold(
+        (l) => print('error code $l'),
+        (r) => print('loaded product 5: $r'),
+      ),
+    );
+  });
 
-      
-    print('Items: ${jsonResponseList.length}');
-  } else {
-    print('Request failed with status: ${response.statusCode}.');
-  }
+
+  var finaly = await espera5Seconds();
+  print('Program End $finaly.----------------');
 }
