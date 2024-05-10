@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'infraestructure/api/cartapi/cart_api_impl.dart';
-import 'infraestructure/api/productsapi/products_api_impl.dart';
-import 'infraestructure/api/usersapi/users_api_impl.dart';
+import 'infraestructure/api/cart/cart.dart';
+import 'infraestructure/api/products/products.dart';
+import 'infraestructure/api/users/users.dart';
 
 main() async {
 
@@ -10,7 +10,7 @@ main() async {
   print('Presione Enter para empezar el programa:');
   stdin.readLineSync();
   
-  final allProductsEither = await ProductsApiImpl().getAllProducts();
+  final allProductsEither = await Products().getAllProducts();
   allProductsEither.fold(
     (l) => print('error code $l'),
     (r){
@@ -21,7 +21,7 @@ main() async {
 
   print('Presione Enter para continuar...');
   stdin.readLineSync();
-  final singleProductEither = await ProductsApiImpl().getSingleProduct(5);
+  final singleProductEither = await Products().getSingleProduct(5);
   singleProductEither.fold(
     (l) => print('error code $l'),
     (r) => print('loaded single product: $r'),
@@ -29,7 +29,7 @@ main() async {
 
   print('Presione Enter para continuar...');
   stdin.readLineSync(); 
-  final allUsersEither = await UsersApiImpl().getAllUsers();
+  final allUsersEither = await Users().getAllUsers();
   allUsersEither.fold(
     (l) => print('error code $l'),
     (r){
@@ -40,7 +40,7 @@ main() async {
 
   print('Presione Enter para continuar...');
   stdin.readLineSync();
-  final singleUserEither = await UsersApiImpl().getSingleUser(5);
+  final singleUserEither = await Users().getSingleUser(5);
   singleUserEither.fold(
     (l) => print('error code $l'),
     (r) => print('loaded user: $r'),
@@ -48,7 +48,7 @@ main() async {
 
   print('Presione Enter para continuar...');
   stdin.readLineSync();
-  final allCartEither = await CartApiImpl().getAllCarts();
+  final allCartEither = await Cart().getAllCarts();
   allCartEither.fold(
     (l) => print('error code $l'),
     (r){
@@ -60,7 +60,7 @@ main() async {
 
   print('Presione Enter para continuar...');
   stdin.readLineSync();
-  final singleCartEither = await CartApiImpl().getSingleCart(1);
+  final singleCartEither = await Cart().getSingleCart(1);
   singleCartEither.fold(
     (l) => print('error code $l'),
     (r) => print('loaded cart: $r'),

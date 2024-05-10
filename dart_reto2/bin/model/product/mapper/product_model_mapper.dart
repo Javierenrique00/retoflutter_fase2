@@ -1,12 +1,7 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'product_model.dart';
+import '../product_model.dart';
 
-// **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
-
-ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
+ProductModel productModelFromJsonMapper(Map<String, dynamic> json) => ProductModel(
       id: (json['id'] as num).toInt(),
       title: json['title'] as String,
       price: (json['price'] as num).toDouble(),
@@ -15,7 +10,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
       image: json['image'] as String,
     );
 
-Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
+Map<String, dynamic> productModelToJsonMapper(ProductModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

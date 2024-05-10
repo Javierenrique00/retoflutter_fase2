@@ -4,11 +4,11 @@ import 'package:dartz/dartz.dart';
 
 import 'paths.dart';
 
-class BaseioApi<T> {
+class Baseio<T> {
 
   final Function (dynamic) serializer;
 
-  BaseioApi({required this.urlpath, required this.serializer});
+  Baseio({required this.urlpath, required this.serializer});
 
   final String urlpath;
 

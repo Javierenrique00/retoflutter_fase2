@@ -1,6 +1,5 @@
 
-class Paths {
-  Paths._();
+abstract class Paths {
 
   static const String urlEndpoint = 'fakestoreapi.com';
   static const String urlProducts = '/products';
