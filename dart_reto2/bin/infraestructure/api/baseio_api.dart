@@ -2,18 +2,19 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:dartz/dartz.dart';
 
+import 'paths.dart';
+
 class BaseioApi<T> {
 
   final Function (dynamic) serializer;
 
   BaseioApi({required this.urlpath, required this.serializer});
 
-  static const String urlEndpoint = 'fakestoreapi.com';
   final String urlpath;
 
   Future<Either<String, List<T>>> getAll() async {
     try{
-      var url = Uri.https(urlEndpoint, urlpath, {'q': '{https}'});
+      var url = Uri.https(Paths.urlEndpoint, urlpath, {'q': '{https}'});
       var response = await http.get(url);
       if (response.statusCode == 200) {
         var jsonResponseList = convert.jsonDecode(response.body) as List<dynamic>;
@@ -31,9 +32,9 @@ class BaseioApi<T> {
     }
   }
 
-  Future<Either<String, T>> getSingleUser(int id) async {
+  Future<Either<String, T>> getSingle(int id) async {
     try{
-      var url = Uri.https(urlEndpoint, '$urlpath/$id', {'q': '{https}'});
+      var url = Uri.https(Paths.urlEndpoint, '$urlpath/$id', {'q': '{https}'});
       var response = await http.get(url);
       if (response.statusCode == 200) {
         var jsonResponse = convert.jsonDecode(response.body) as Map<String, dynamic>;
