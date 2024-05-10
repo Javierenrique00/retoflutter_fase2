@@ -1,6 +1,6 @@
 # Consumo api Fake Store
 
-Este prorama se desarrolló para el consumo de la API Fake Store: [Link fake Store](https://fakestoreapi.com/)
+Este programa se desarrolló para el consumo de la API Fake Store: [Link fake Store](https://fakestoreapi.com/)
 
 Se crean 3 apis para el consumo de los endpoints así:
 
