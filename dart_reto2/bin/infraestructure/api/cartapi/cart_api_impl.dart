@@ -1,8 +1,8 @@
 
-import '../../model/cart_model.dart';
-import 'baseio_api.dart';
+import '../../../model/cart/cart_model.dart';
+import '../common/baseio_api.dart';
 import 'cart_api.dart';
-import 'paths.dart';
+import '../common/paths.dart';
 
 class CartApiImpl implements CartApi {
 

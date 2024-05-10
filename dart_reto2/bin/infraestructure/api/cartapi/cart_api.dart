@@ -1,7 +1,7 @@
 
 import 'package:dartz/dartz.dart';
 
-import '../../model/cart_model.dart';
+import '../../../model/cart/cart_model.dart';
 
 
 typedef ResponseGetAllCarts = Either<String, List<CartModel>>;

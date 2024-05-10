@@ -1,7 +1,7 @@
 
 import 'package:dartz/dartz.dart';
 
-import '../../model/product_model.dart';
+import '../../../model/product/product_model.dart';
 
 typedef ResponseGetAllProducts = Either<String, List<ProductModel>>;
 typedef ResponseGetProduct = Either<String, ProductModel>;

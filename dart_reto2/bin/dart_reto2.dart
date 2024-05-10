@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'infraestructure/api/cart_api_impl.dart';
-import 'infraestructure/api/products_api_impl.dart';
-import 'infraestructure/api/users_api_impl.dart';
+import 'infraestructure/api/cartapi/cart_api_impl.dart';
+import 'infraestructure/api/productsapi/products_api_impl.dart';
+import 'infraestructure/api/usersapi/users_api_impl.dart';
 
 main() async {
 

@@ -1,7 +1,7 @@
 
-import '../../model/user_model.dart';
-import 'baseio_api.dart';
-import 'paths.dart';
+import '../../../model/user/user_model.dart';
+import '../common/baseio_api.dart';
+import '../common/paths.dart';
 import 'users_api.dart';
 
 class UsersApiImpl implements UsersApi{
