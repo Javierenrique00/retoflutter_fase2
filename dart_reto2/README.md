@@ -79,3 +79,20 @@ El programa contiene lectura de la consola mediante stdin.readLineSync() y por t
 Para compilarlo se hace con el comando:
 
 >_>     *dart dart_reto2.dart*
+
+## Versiones
+
+Package dependencies:
+
+- Dart SDK version: 3.3.1 (stable)
+- args: ^2.4.2
+- dartz: ^0.10.1
+- http: ^1.2.1
+- json_annotation: ^4.9.0
+
+dev dependencies:
+
+- build_runner: ^2.4.9
+- json_serializable: ^6.8.0
+- lints: ^3.0.0
+- test: ^1.24.0
