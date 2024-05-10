@@ -2,13 +2,13 @@
 
 Este prorama se desarrolló para el consumo de la API Fake Store: [Link fake Store](https://fakestoreapi.com/)
 
-Se crean 3 apis para el consumo de los endpoaint así:
+Se crean 3 apis para el consumo de los endpoints así:
 
 - ProductsApi
 - UsersApi
 - CartApi
 
-Estas Api proveen cada una su intercace y su implementación correspondiente para acceder a todos los items o a uno específico.
+Estas Api proveen cada una su interface y su implementación correspondiente para acceder a todos los items o a uno específico.
 
 A continuación se muestra la interface que maneja el CartApi -->
 
@@ -34,7 +34,7 @@ class CartApiImpl implements CartApi {
 }
 ```
 
-Se observa que todas las implementaciones, tienen la misma estructura, y lo único que cambia son los tipos de datos, se crea una base genérica que describe como se accede a la Api, como se descerializa y como se manejan los errores.
+Se observa que todas las implementaciones, tienen la misma estructura, y lo único que cambia son los tipos de datos. Por tanto se crea una base genérica que describe como se accede a la Api, como se descerializa y como se manejan los errores.
 
 Esto se hace con la clase BaseioApi, la cual en su constructor recibe 2 parámetros, el path del endPoint y el serializador Json.
 
@@ -71,4 +71,11 @@ A continuación se muestra como se invoca el acceso desde el programa principal:
         },
   );
   ```
-  
+
+**Importante**:
+
+El programa contiene lectura de la consola mediante stdin.readLineSync() y por tanto se debe ejecutar en la consola directamente. Esto es con el propósito para poder ir viendo como se leen los datos prograsivamente para cada endpoint.
+
+Para compilarlo se hace con el comando:
+
+>_>     *dart dart_reto2.dart*
