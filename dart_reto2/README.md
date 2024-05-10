@@ -74,7 +74,7 @@ A continuación se muestra como se invoca el acceso desde el programa principal:
 
 **Importante**:
 
-El programa contiene lectura de la consola mediante stdin.readLineSync() y por tanto se debe ejecutar en la consola directamente. Esto es con el propósito para poder ir viendo como se leen los datos prograsivamente para cada endpoint.
+El programa contiene lectura de la consola mediante stdin.readLineSync() y por tanto se debe ejecutar en la consola directamente. Esto es con el propósito de poder ir viendo como se leen los datos progresivamente para cada endpoint.
 
 Para compilarlo se hace con el comando:
 
