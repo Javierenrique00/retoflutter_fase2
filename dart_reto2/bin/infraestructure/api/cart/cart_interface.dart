@@ -12,5 +12,4 @@ abstract class CartInterface {
   Future<ResponseGetAllCarts> getAllCarts();
   Future<ResponseGetCart> getSingleCart(int id);
   
-  
 }

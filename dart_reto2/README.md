@@ -4,27 +4,27 @@ Este programa se desarrolló para el consumo de la API Fake Store: [Link fake St
 
 Se crean 3 apis para el consumo de los endpoints así:
 
-- ProductsApi
-- UsersApi
-- CartApi
+- ProductsInterface
+- UsersInterface
+- CartInterface
 
-Estas Api proveen cada una su interface y su implementación correspondiente para acceder a todos los items o a uno específico.
+Estas interfaces tienen su implementación correspondiente para acceder a todos los items o a cada uno específico por ID.
 
-A continuación se muestra la interface que maneja el CartApi -->
+A continuación se muestra la interface que maneja el Cart -->
 
 ```dart
-abstract class CartApi {
+abstract class CartInterface {
   Future<ResponseGetAllCarts> getAllCarts();
-  Future<ResponseGetCart> getSingleCart(int id); 
+  Future<ResponseGetCart> getSingleCart(int id);
 }
 ```
 
-La implementación de esa CartApi -->
+La implementación de esta Cart -->
 
 ```dart
-class CartApiImpl implements CartApi {
+class Cart implements CartInterface {
 
-  final cartApi = BaseioApi<CartModel>(urlpath: Paths.urlCarts,serializer: (p0) => CartModel.fromJson(p0),);
+  final cartApi = Baseio<CartModel>(urlpath: Paths.urlCarts,serializer: (p0) => cartModelFromJsonMapper(p0),);
 
   @override
   Future<ResponseGetAllCarts> getAllCarts() => cartApi.getAll();
@@ -36,24 +36,24 @@ class CartApiImpl implements CartApi {
 
 Se observa que todas las implementaciones, tienen la misma estructura, y lo único que cambia son los tipos de datos. Por tanto se crea una base genérica que describe como se accede a la Api, como se descerializa y como se manejan los errores.
 
-Esto se hace con la clase BaseioApi, la cual en su constructor recibe 2 parámetros, el path del endPoint y el serializador Json.
+Esto se hace con la clase Baseio, la cual en su constructor recibe 2 parámetros, el path del endPoint y el mapper fromJson.
 
-Para la implementación del cartApi -->
+Para la implementación del cart -->
 
 ```dart
-final cartApi = BaseioApi<CartModel>(urlpath: Paths.urlCarts,serializer: (p0) => CartModel.fromJson(p0),);
+final cartApi = Baseio<CartModel>(urlpath: Paths.urlCarts,serializer: (p0) => cartModelFromJsonMapper(p0),);
 ```
 
 Para la parametrización de las rutas de los endpoint se crea un archivo paths.dart, con el cual se configuran las rutas de los endpoint de manera centralizada.
 
 ```dart
-class Paths {
-  Paths._();
+abstract class Paths {
 
   static const String urlEndpoint = 'fakestoreapi.com';
   static const String urlProducts = '/products';
   static const String urlCarts = '/carts';
   static const String urlUsers = '/users';
+
 }
 ```
 
@@ -62,7 +62,7 @@ Las respuestas a cada llamado del api se hace de manera asíncrona, generando un
 A continuación se muestra como se invoca el acceso desde el programa principal:
 
 ```dart
-  final allCartEither = await CartApiImpl().getAllCarts();
+  final allCartEither = await Cart.getAllCarts();
   allCartEither.fold(
     (l) => print('error code $l'),
     (r){
@@ -88,11 +88,8 @@ Package dependencies:
 - args: ^2.4.2
 - dartz: ^0.10.1
 - http: ^1.2.1
-- json_annotation: ^4.9.0
 
 dev dependencies:
 
-- build_runner: ^2.4.9
-- json_serializable: ^6.8.0
 - lints: ^3.0.0
 - test: ^1.24.0
